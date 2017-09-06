@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>UnionPay Chat</title>
+	<link rel="stylesheet" href="index.css">
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+</head>
+<body>
+	<div class="main">
+		<div class="logo">
+			<img src="logo.png" alt="logo">
+		</div>
+		<div class="from">
+			<textarea id="chat" readonly></textarea>
+		</div>
+		<div class="to">
+			<input id="msg" tabindex="1" placeholder="按回车键发送消息" onkeydown="keydown()"/>
+		</div>
+		<div class="tip">
+			<p>演示</p>
+		</div>
+	</div>
+</body>
+</html>
