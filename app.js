@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var http = require('http');
 var server = http.Server(app);
-require('./lib/server').init(server);
+require('./lib/chat').init(server);
 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.html', require('ejs').__express);
@@ -19,7 +19,7 @@ app.use(reqlog);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./router/index'));
-app.use('/chat', require('./router/chat'));
+app.use('/api', require('./router/api'));
 
 var config = require('./config');
 var log = require('./lib/log');

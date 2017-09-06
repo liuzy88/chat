@@ -2,6 +2,46 @@ body {
 	background-color: #ccc;
 }
 
+a {
+	text-decoration: none;
+}
+
+.users {
+	text-align: center;
+	vertical-align: middle;
+	margin: 0 auto;
+}
+
+.users div {
+	width: 250px;
+	height: 250px;
+	border: 1px solid;
+	margin: 20px;
+	float: left;
+	cursor: pointer;
+}
+
+.users a {
+	font-size: 64px;
+	line-height: 250px;
+}
+
+.A {
+	color: #FC8F3D;
+}
+
+.B {
+	color: #6AA100;
+}
+
+.C {
+	color: #7F98FE;
+}
+
+.D {
+	color: #DDB20B;
+}
+
 .main {
 	width: 980px;
 	height: 100%;

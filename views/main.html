@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>UnionPay Chat</title>
+    <link rel="stylesheet" href="index.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="logo">
+            <img src="logo.png" alt="logo">
+        </div>
+        <div class="from">
+            <textarea id="chat" readonly></textarea>
+        </div>
+        <div class="to">
+            <input id="msg" tabindex="1" placeholder="按回车键发送消息" onkeydown="keydown()" />
+        </div>
+        <div class="tip">
+            <p>演示</p>
+        </div>
+    </div>
+    <script type="text/javascript">
+    function keydown() {
+        if (event.keyCode == 13 && $('#msg').val().trim().length > 0) {
+            send();
+        }
+    }
+
+    var socket = io();
+
+    function setname(name) {
+        socket.emit('setname', name);
+    }
+
+    socket.on('message', function(msg) {
+        $('#chat').val($('#chat').val() + msg + '\n');
+        $("#chat").scrollTop($("#chat")[0].scrollHeight);
+    });
+
+    function send() {
+        var msg = $('#msg').val().trim();
+        if (/^\@/.test(msg)) {
+            var to = msg.split(' ')[0].substring(1);
+            console.log(to);
+            socket.emit('message', { to: to, msg: msg.split(' ')[1] });
+        } else {
+            socket.emit('message', { to: '', msg: msg });
+        }
+        $('#msg').val('');
+    }
+
+    $(function() {
+        $('#msg')[0].focus();
+        $('body').click(function() {
+            $('#msg')[0].focus();
+        });
+        setname('<%=p%>');
+    });
+    </script>
+</body>
+
+</html>
