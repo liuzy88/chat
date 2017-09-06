@@ -1,5 +1,5 @@
 body {
-	background-color: #ccc;
+	background-color: #AECFF5;
 }
 
 a {
@@ -12,34 +12,31 @@ a {
 	margin: 0 auto;
 }
 
-.users div {
-	width: 250px;
-	height: 250px;
-	border: 1px solid;
-	margin: 20px;
-	float: left;
-	cursor: pointer;
-}
-
 .users a {
+	width: 200px;
+	height: 200px;
+	border: 0;
+	margin: 100px 20px;
+	float: left;
 	font-size: 64px;
-	line-height: 250px;
+	line-height: 200px;
+	border-radius: 4px;
 }
 
 .A {
-	color: #FC8F3D;
+	background-color: #FC8F3D;
 }
 
 .B {
-	color: #6AA100;
+	background-color: #6AA100;
 }
 
 .C {
-	color: #7F98FE;
+	background-color: #7F98FE;
 }
 
 .D {
-	color: #DDB20B;
+	background-color: #DDB20B;
 }
 
 .main {
