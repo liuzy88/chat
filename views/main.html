@@ -47,7 +47,7 @@
         if (/^\@/.test(msg)) {
             var to = msg.split(' ')[0].substring(1);
             console.log(to);
-            socket.emit('message', { to: to, msg: msg.split(' ')[1] });
+            socket.emit('message', { to: to, msg: msg.substring(msg.indexOf(' ') + 1) });
         } else {
             socket.emit('message', { to: '', msg: msg });
         }
