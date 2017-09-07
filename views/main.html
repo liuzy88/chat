@@ -36,6 +36,7 @@
     setInterval(function() {
         var m = msgs.shift();
         if (m) {
+            $("#chat").scrollTop($("#chat")[0].scrollHeight);
             $('#chat').val($('#chat').val() + m);
         }
     }, 24);
@@ -47,15 +48,14 @@
     }
 
     socket.on('message', function(msg) {
-        $("#chat").scrollTop($("#chat")[0].scrollHeight);
         (msg + '\n').split('').map(function(a) { msgs.push(a); });
     });
 
-    socket.on('disconnect', function () {
+    socket.on('disconnect', function() {
         ('you have been disconnected.\n').split('').map(function(a) { msgs.push(a); });
     });
 
-    socket.on('reconnect', function () {
+    socket.on('reconnect', function() {
         ('you have been reconnected.\n').split('').map(function(a) { msgs.push(a); });
         setname('<%=p%>');
     });
