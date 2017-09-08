@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title><%=p%></title>
+    <title><%=p=='A'?'交易中心':(p=='B'?'验证中心':(p=='APP'?'客户端':'UnionPay'))%></title>
     <link rel="stylesheet" href="index.css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
@@ -13,19 +13,22 @@
     <div class="main">
         <div class="logo">
             <img src="logo.png" alt="logo">
+            <%if(p=='A'){%>
+            <span>交易中心</span>
+            <%}else if(p=='B'){%>
+            <span>验证中心</span>
+            <%}else if(p=='APP'){%>
+            <span>客户端 <button onclick="transfer()">交易</button></span>
+            <%}%>
         </div>
         <div class="from">
             <textarea id="chat" readonly></textarea>
         </div>
-        <!-- <div class="to">
-            <input id="msg" tabindex="1" placeholder="Press the Enter to send message." onkeydown="keydown()" />
-        </div> -->
     </div>
     <script type="text/javascript">
-    function keydown() {
-        if (event.keyCode == 13 && $('#msg').val().trim().length > 0) {
-            send();
-        }
+
+    function transfer() {
+        socket.emit('transfer start', 'transfer is start');
     }
 
     var msgs = [];
@@ -36,12 +39,12 @@
             $("#chat").scrollTop($("#chat")[0].scrollHeight);
             $('#chat').val($('#chat').val() + m);
         }
-    }, 20);
+    }, 12);
 
     var socket = io();
 
-    function setname(name) {
-        socket.emit('setname', name);
+    function setname() {
+        socket.emit('setname', '<%=p%>');
     }
 
     function showmsg(msg) {
@@ -61,7 +64,7 @@
     socket.on('reconnect', function() {
         console.log('have been reconnected.');
         showmsg('have been reconnected.');
-        setname('<%=p%>');
+        setname();
     });
     // 1交易开始
     socket.on('transfer start', function(msg) {
@@ -84,17 +87,8 @@
         console.log('transfer end.');
     });
 
-    function send() {
-        socket.emit('message', $('#msg').val().trim());
-        $('#msg').val('');
-    }
-
     $(function() {
-        // $('#msg')[0].focus();
-        // $('body').click(function() {
-        //     $('#msg')[0].focus();
-        // });
-        setname('<%=p%>');
+        setname();
     });
     </script>
 </body>

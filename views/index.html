@@ -3,13 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>UnionPay Chat</title>
+    <title>UnionPay</title>
     <link rel="stylesheet" href="index.css">
     <script>
-    function openUrl(url) {
-        window.open('/?p=' + url,
-            '',
-            'width=580,height=360,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no,titlebar=no');
+    var width = 420;
+    var height = 342;
+    function openUrl(name, left, top) {
+        window.open('/?p=' + name,
+            name,
+            'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top +
+            ',directories=no,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no,titlebar=no');
     }
     </script>
 </head>
@@ -20,9 +23,9 @@
             <img src="logo.png" alt="logo">
         </div>
         <div class="users">
-            <a href="javascript:;" class="A" onclick="javascript:openUrl('A');">A</a>
-            <a href="javascript:;" class="B" onclick="javascript:openUrl('B');">B</a>
-            <a href="javascript:;" class="C" onclick="javascript:openUrl('APP');">APP</a>
+            <a href="javascript:;" class="A" onclick="javascript:openUrl('A', screen.width-width-9, 0);">A</a>
+            <a href="javascript:;" class="B" onclick="javascript:openUrl('B', screen.width-width-9, screen.height-height-55)">B</a>
+            <a href="javascript:;" class="C" onclick="javascript:openUrl('APP', 0, 0);">APP</a>
         </div>
     </div>
 </body>
