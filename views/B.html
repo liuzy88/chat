@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>UnionPay Chat</title>
+    <title><%=p%></title>
     <link rel="stylesheet" href="index.css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
@@ -74,6 +74,11 @@
         (msg + '\n').split('').map(function(a) { msgs.push(a); });
         socket.emit('transfer end', 'transfer is end');
     });
+    // 4交易结束
+    socket.on('transfer end', function(msg) {
+        (msg + '\n').split('').map(function(a) { msgs.push(a); });
+        console.log('transfer end.');
+    });
 
     function send() {
         socket.emit('message', $('#msg').val().trim());
@@ -81,10 +86,10 @@
     }
 
     $(function() {
-        $('#msg')[0].focus();
-        $('body').click(function() {
-            $('#msg')[0].focus();
-        });
+        // $('#msg')[0].focus();
+        // $('body').click(function() {
+        //     $('#msg')[0].focus();
+        // });
         setname('<%=p%>');
     });
     </script>
