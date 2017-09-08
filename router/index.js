@@ -4,8 +4,12 @@ var config = require('../config');
 var log = require('../lib/log');
 
 router.get('/', function(req, res, next) {
-    if (req.query.p) {
-        res.render('main', { p: req.query.p });
+    if (req.query.p == 'A') {
+        res.render('A', { p: req.query.p });
+    } else if (req.query.p == 'B') {
+        res.render('B', { p: req.query.p });
+    } else if (req.query.p == 'APP') {
+        res.render('APP', { p: req.query.p });
     } else {
         res.render('index');
     }

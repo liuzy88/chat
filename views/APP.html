@@ -18,7 +18,7 @@
             <textarea id="chat" readonly></textarea>
         </div>
         <div class="to">
-            <input id="msg" tabindex="1" placeholder="Press the Enter to send. And you can @ other users." onkeydown="keydown()" />
+            <input id="msg" tabindex="1" placeholder="Press the Enter to send message." onkeydown="keydown()" />
         </div>
         <div class="tip">
             <p>演示</p>
@@ -36,6 +36,7 @@
     setInterval(function() {
         var m = msgs.shift();
         if (m) {
+            $("#chat").scrollTop($("#chat")[0].scrollHeight);
             $('#chat').val($('#chat').val() + m);
         }
     }, 24);
@@ -47,27 +48,25 @@
     }
 
     socket.on('message', function(msg) {
-        $("#chat").scrollTop($("#chat")[0].scrollHeight);
-        (msg + '\n').split('').map(function(a) { msgs.push(a); });
+        console.log('message:' + msg);
     });
 
-    socket.on('disconnect', function () {
-        ('you have been disconnected.\n').split('').map(function(a) { msgs.push(a); });
+    socket.on('disconnect', function() {
+        console.log('have been disconnected.');
     });
 
-    socket.on('reconnect', function () {
-        ('you have been reconnected.\n').split('').map(function(a) { msgs.push(a); });
+    socket.on('reconnect', function() {
+        console.log('have been reconnected.');
         setname('<%=p%>');
+    });
+    // 4交易结束
+    socket.on('transfer end', function(msg) {
+        (msg + '\n').split('').map(function(a) { msgs.push(a); });
+        console.log('transfer end.');
     });
 
     function send() {
-        var msg = $('#msg').val().trim();
-        if (/^\@/.test(msg)) {
-            var to = msg.split(' ')[0].substring(1);
-            socket.emit('message', { to: to, msg: msg.substring(msg.indexOf(' ') + 1) });
-        } else {
-            socket.emit('message', { to: '', msg: msg });
-        }
+        socket.emit('message', $('#msg').val().trim());
         $('#msg').val('');
     }
 
