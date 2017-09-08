@@ -17,11 +17,11 @@
         <div class="from">
             <textarea id="chat" readonly></textarea>
         </div>
-        <div class="to">
+        <!-- <div class="to">
             <input id="msg" tabindex="1" placeholder="Press the Enter to send message." onkeydown="keydown()" />
-        </div>
+        </div> -->
         <div class="tip">
-            <p>演示</p>
+            <p>*演示项目*</p>
         </div>
     </div>
     <script type="text/javascript">
@@ -39,7 +39,7 @@
             $("#chat").scrollTop($("#chat")[0].scrollHeight);
             $('#chat').val($('#chat').val() + m);
         }
-    }, 24);
+    }, 20);
 
     var socket = io();
 
@@ -47,36 +47,43 @@
         socket.emit('setname', name);
     }
 
+    function showmsg(msg) {
+        (msg + '\n').split('').map(function(a) { msgs.push(a); });
+    }
+
     socket.on('message', function(msg) {
-        console.log('message:' + msg);
+        console.log(msg);
+        showmsg(msg);
     });
 
     socket.on('disconnect', function() {
         console.log('have been disconnected.');
+        showmsg('have been disconnected.');
     });
 
     socket.on('reconnect', function() {
         console.log('have been reconnected.');
+        showmsg('have been reconnected.');
         setname('<%=p%>');
     });
     // 1交易开始
     socket.on('transfer start', function(msg) {
-        (msg + '\n').split('').map(function(a) { msgs.push(a); });
-        socket.emit('validate start', 'validate is start');
+        showmsg(msg);
+        socket.emit('validate start', 'validate is start.');
     });
     // 2验证开始
     socket.on('validate start', function(msg) {
-        (msg + '\n').split('').map(function(a) { msgs.push(a); });
-        socket.emit('validate end', 'validate is end');
+        showmsg(msg);
+        socket.emit('validate end', 'validate is end.');
     });
     // 3验证结束
     socket.on('validate end', function(msg) {
-        (msg + '\n').split('').map(function(a) { msgs.push(a); });
-        socket.emit('transfer end', 'transfer is end');
+        showmsg(msg);
+        socket.emit('transfer end', 'transfer is end.');
     });
     // 4交易结束
     socket.on('transfer end', function(msg) {
-        (msg + '\n').split('').map(function(a) { msgs.push(a); });
+        showmsg(msg);
         console.log('transfer end.');
     });
 
@@ -94,3 +101,5 @@
     });
     </script>
 </body>
+
+</html>
