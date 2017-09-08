@@ -24,5 +24,5 @@ var config = require('./config');
 var log = require('./lib/log');
 
 server.listen(config.port, function() {
-    log('Listening on ' + server.address().port);
+	log('Listening on ' + server.address().port);
 });
