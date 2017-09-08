@@ -2,25 +2,29 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>UnionPay Chat</title>
-	<link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <title>UnionPay Chat</title>
+    <link rel="stylesheet" href="index.css">
+    <script>
+    function openUrl(url) {
+        window.open('http://127.0.0.1:8088/?p=' + url,
+            'newwindow',
+            'width=960,height=520,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no,titlebar=no');
+    }
+    </script>
 </head>
 
 <body>
-	<div class="main">
-		<div class="logo">
-			<img src="logo.png" alt="logo">
-		</div>
-		<div class="users">
-			<a href="/?p=A" class="A">A</a>
-			<a href="/?p=B" class="B">B</a>
-			<a href="/?p=APP" class="C">APP</a>
-		</div>
-		<div class="tip">
-			<p>*演示项目*</p>
-		</div>
-	</div>
+    <div class="main">
+        <div class="logo">
+            <img src="logo.png" alt="logo">
+        </div>
+        <div class="users">
+            <a href="javascript:;" class="A" onclick="javascript:openUrl('A');">A</a>
+            <a href="javascript:;" class="B" onclick="javascript:openUrl('B');">B</a>
+            <a href="javascript:;" class="C" onclick="javascript:openUrl('APP');">APP</a>
+        </div>
+    </div>
 </body>
 
 </html>
